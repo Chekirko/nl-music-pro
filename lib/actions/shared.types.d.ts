@@ -1,4 +1,6 @@
-import IUser from "@/database/user.model";
+export interface GetUserByIdParams {
+  userId: string;
+}
 
 export interface CreateUserParams {
   clerkId: string;
@@ -10,10 +12,20 @@ export interface CreateUserParams {
 
 export interface UpdateUserParams {
   clerkId: string;
-  updateData: Partial<IUser>;
+  name: string;
+  nickname: string;
+  email: string;
+  photo: string;
   path: string;
 }
 
 export interface DeleteUserParams {
   clerkId: string;
+}
+
+export interface CreateTeamParams {
+  creator: string;
+  name: string;
+  description: string;
+  path: string;
 }

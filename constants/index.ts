@@ -10,32 +10,32 @@ export const sidebarLinks: SidebarLink[] = [
   {
     imgURL: "/assets/icons/home.svg",
     route: "/",
-    label: "Home",
+    label: "Пісні",
   },
   {
     imgURL: "/assets/icons/users.svg",
-    route: "/community",
-    label: "Community",
+    route: "/teams",
+    label: "Команди",
   },
   {
     imgURL: "/assets/icons/star.svg",
-    route: "/collection",
-    label: "Collections",
+    route: "/events",
+    label: "Списки",
   },
   {
     imgURL: "/assets/icons/suitcase.svg",
-    route: "/jobs",
-    label: "Find Jobs",
+    route: "/saved",
+    label: "Збережені",
   },
   {
     imgURL: "/assets/icons/tag.svg",
     route: "/tags",
-    label: "Tags",
+    label: "Теги",
   },
   {
     imgURL: "/assets/icons/user.svg",
     route: "/profile",
-    label: "Profile",
+    label: "Акаунт",
   },
   {
     imgURL: "/assets/icons/question.svg",

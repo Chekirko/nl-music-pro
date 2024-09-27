@@ -58,8 +58,6 @@ export async function POST(req: Request) {
     const { id, email_addresses, image_url, username, first_name, last_name } =
       evt.data;
 
-    console.log(id);
-
     // Create a new user in your database
     const mongoUser = await createUser({
       clerkId: id,
@@ -79,12 +77,10 @@ export async function POST(req: Request) {
     // Update user in your database
     const mongoUser = await updateUser({
       clerkId: id,
-      updateData: {
-        name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
-        username: username! || "test",
-        email: email_addresses[0].email_address,
-        photo: image_url,
-      },
+      name: `${first_name}${last_name ? ` ${last_name}` : ""}`,
+      nickname: username! || "test",
+      email: email_addresses[0].email_address,
+      photo: image_url,
       path: `/profile/${id}`,
     });
 
