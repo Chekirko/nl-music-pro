@@ -9,7 +9,7 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<Response> {
   const formData = await req.formData();
   const file = formData.get("file") as File;
 
@@ -45,5 +45,5 @@ export async function POST(req: NextRequest) {
     );
 
     stream.pipe(uploadStream); // Передаємо потік у Cloudinary
-  });
+  }) as Promise<Response>;
 }
