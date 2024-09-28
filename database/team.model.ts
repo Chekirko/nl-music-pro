@@ -3,7 +3,9 @@ import { Schema, models, model, Document } from "mongoose";
 export interface ITeam extends Document {
   creator: string;
   name: string;
-  description?: string;
+  description: string;
+  church: string;
+  photo?: string;
   members: {
     user: string;
     role: "admin" | "member";
@@ -16,7 +18,9 @@ export interface ITeam extends Document {
 const TeamSchema = new Schema({
   creator: { type: Schema.Types.ObjectId, ref: "User", required: true },
   name: { type: String, required: true, unique: true },
-  description: { type: String, default: "" },
+  description: { type: String, required: true },
+  photo: { type: String, default: "" },
+  church: { type: String, required: true },
   members: [
     {
       user: { type: Schema.Types.ObjectId, ref: "User" },

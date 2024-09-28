@@ -2,6 +2,10 @@ export interface GetUserByIdParams {
   userId: string;
 }
 
+export interface GetUserTeamsParams {
+  userId: string;
+}
+
 export interface CreateUserParams {
   clerkId: string;
   name: string;
@@ -26,6 +30,8 @@ export interface DeleteUserParams {
 export interface CreateTeamParams {
   creator: string;
   name: string;
+  photo?: string;
   description: string;
   path: string;
+  church: string;
 }

@@ -6,6 +6,7 @@ import {
   CreateUserParams,
   DeleteUserParams,
   GetUserByIdParams,
+  GetUserTeamsParams,
   UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
@@ -75,5 +76,27 @@ export async function deleteUser(params: DeleteUserParams) {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+}
+
+export async function getUserTeams(params: GetUserTeamsParams) {
+  try {
+    connectToDb();
+    const { userId } = params;
+
+    const userWithTeams = await User.findById(userId).populate({
+      path: "teams.teamId", // Заповнюємо поле teamId в масиві teams
+      model: "Team", // Вказуємо модель для наповнення
+    });
+
+    if (!userWithTeams) {
+      throw new Error("User not found");
+    }
+
+    // 2. Повертаємо всі команди користувача
+    return userWithTeams.teams.map((teamObj: any) => teamObj.teamId); // Повертаємо самі команди
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to retrieve user teams");
   }
 }
