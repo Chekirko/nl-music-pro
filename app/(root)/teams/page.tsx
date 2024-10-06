@@ -6,7 +6,6 @@ import { getUserById, getUserTeams } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
 
 const TeamsPage = async () => {
   const { userId } = auth();
@@ -18,6 +17,7 @@ const TeamsPage = async () => {
   const mongoUser = await getUserById({ userId });
 
   const userTeams = await getUserTeams({ userId: mongoUser });
+  console.log(userTeams);
   const { teams } = await getAllTeams();
   return (
     <>
@@ -37,8 +37,12 @@ const TeamsPage = async () => {
       <div className=" mt-7 ">
         <Tabs defaultValue="all" className="w-full">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
-            <TabsTrigger value="mine">Мої команди</TabsTrigger>
-            <TabsTrigger value="all">Всі команди</TabsTrigger>
+            <TabsTrigger value="mine" className="text-dark400_light900">
+              Мої команди
+            </TabsTrigger>
+            <TabsTrigger value="all" className="text-dark400_light900">
+              Всі команди
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="mine">
             <div className="flex flex-wrap gap-4">

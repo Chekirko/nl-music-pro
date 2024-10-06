@@ -10,6 +10,7 @@ import {
   UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
+import Team, { ITeam } from "@/database/team.model";
 
 export async function getUserById(params: GetUserByIdParams) {
   try {
@@ -79,18 +80,27 @@ export async function deleteUser(params: DeleteUserParams) {
   }
 }
 
-export async function getUserTeams(params: GetUserTeamsParams) {
+export async function getUserTeams(
+  params: GetUserTeamsParams
+): Promise<ITeam[]> {
   try {
     connectToDb();
     const { userId } = params;
 
+    if (!userId) {
+      return [];
+    }
+
     const userWithTeams = await User.findById(userId).populate({
       path: "teams.teamId", // Заповнюємо поле teamId в масиві teams
-      model: "Team", // Вказуємо модель для наповнення
+      model: Team, // Вказуємо модель для наповнення
     });
 
     if (!userWithTeams) {
       throw new Error("User not found");
+    }
+    if (!userWithTeams.teams || userWithTeams.teams.length === 0) {
+      return [];
     }
 
     // 2. Повертаємо всі команди користувача

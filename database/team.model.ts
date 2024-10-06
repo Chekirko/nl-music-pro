@@ -1,6 +1,7 @@
 import { Schema, models, model, Document } from "mongoose";
 
 export interface ITeam extends Document {
+  _id: string;
   creator: string;
   name: string;
   description: string;
